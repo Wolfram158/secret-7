@@ -43,6 +43,7 @@ dependencies {
     implementation(project(":core:di"))
     implementation(project(":core:network"))
 
+    implementation(libs.compose.material.icons)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
