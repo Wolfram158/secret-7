@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    kotlin("plugin.serialization") version "2.3.20"
 }
 
 android {
@@ -43,7 +44,13 @@ dependencies {
     implementation(project(":core:di"))
     implementation(project(":core:common"))
     implementation(project(":feature:product_details"))
+    implementation(project(":feature:product_list"))
 
+    implementation(libs.kotlinx.serialization.json)
+
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.androidx.navigation.common.ktx)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

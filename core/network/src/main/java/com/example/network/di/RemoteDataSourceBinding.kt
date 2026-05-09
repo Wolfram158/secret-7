@@ -23,6 +23,7 @@ object RemoteDataSourceBinding {
     fun provideJson(): Json {
         return Json {
             ignoreUnknownKeys = true
+            encodeDefaults = true
         }
     }
 

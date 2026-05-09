@@ -8,5 +8,5 @@ data class ShortProductInfo(
     @SerialName("id") val id: Long,
     @SerialName("title") val title: String,
     @SerialName("price") val price: Double,
-    @SerialName("brand") val brand: String
+    @SerialName("brand") val brand: String? = null
 )
