@@ -26,8 +26,8 @@ import com.example.product_details.di.createProductDetailsGraph
 @Composable
 fun ProductDetailsScreen(
     id: Long,
+    onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
-    onBackClick: () -> Unit
 ) {
     val appComponent = LocalAppComponent.current
     val graph = remember(appComponent) { appComponent.createProductDetailsGraph() }

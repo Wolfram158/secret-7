@@ -29,10 +29,10 @@ fun NavGraph(
             val route = entry.toRoute<Routes.ProductDetails>()
             ProductDetailsScreen(
                 route.id,
-                Modifier,
                 {
                     navHostController.popBackStack()
-                }
+                },
+                Modifier
             )
         }
     }
