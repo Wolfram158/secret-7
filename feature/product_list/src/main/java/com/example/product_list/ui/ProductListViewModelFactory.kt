@@ -11,11 +11,11 @@ import dev.zacsweers.metro.SingleIn
 @SingleIn(ProductListScope::class)
 @Inject
 internal class ProductListViewModelFactory(
-    private val getProductDetailsUseCase: GetProductsUseCase
+    private val getProductsUseCase: GetProductsUseCase
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return ProductListViewModel(
-            getProductsUseCase = getProductDetailsUseCase
+            getProductsUseCase = getProductsUseCase
         ) as T
     }
 }
