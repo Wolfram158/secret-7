@@ -8,7 +8,8 @@ enum class Selector {
     RATING,
     WEIGHT,
     AVAILABILITY_STATUS,
-    WARRANTY_INFORMATION;
+    WARRANTY_INFORMATION,
+    THUMBNAIL;
 
     override fun toString(): String = when (this) {
         AVAILABILITY_STATUS -> "availabilityStatus"

@@ -6,13 +6,13 @@ plugins {
 android {
     namespace = "com.example.di"
     compileSdk {
-        version = release(36) {
+        version = release(libs.versions.releaseVersion.get().toInt()) {
             minorApiLevel = 1
         }
     }
 
     defaultConfig {
-        minSdk = 28
+        minSdk = libs.versions.minSdkVersion.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -35,6 +35,7 @@ android {
 
 dependencies {
     implementation(project(":core:network"))
+    implementation(project(":core:database"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

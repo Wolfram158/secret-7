@@ -5,8 +5,8 @@ import android.content.Context
 import com.example.di.AppComponentProvider
 
 class App : Application() {
-    val appComponent by lazy {
-        AppComponentProvider.provideAppComponent()
+    val appComponent by lazy(LazyThreadSafetyMode.NONE) {
+        AppComponentProvider.provideAppComponent(this)
     }
 
     override fun onCreate() {
