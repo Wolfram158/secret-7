@@ -6,13 +6,13 @@ plugins {
 android {
     namespace = "com.example.common"
     compileSdk {
-        version = release(36) {
+        version = release(libs.versions.releaseVersion.get().toInt()) {
             minorApiLevel = 1
         }
     }
 
     defaultConfig {
-        minSdk = 28
+        minSdk = libs.versions.minSdkVersion.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -40,6 +40,7 @@ android {
 dependencies {
     implementation(project(":core:di"))
 
+    implementation(libs.compose.material.icons)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)

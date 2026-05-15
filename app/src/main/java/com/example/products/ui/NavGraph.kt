@@ -19,7 +19,9 @@ fun NavGraph(
         composable<Routes.ProductList> {
             ProductListScreen(
                 { id ->
-                    navHostController.navigate(Routes.ProductDetails(id))
+                    navHostController.navigate(Routes.ProductDetails(id)) {
+                        launchSingleTop = true
+                    }
                 }
             )
         }

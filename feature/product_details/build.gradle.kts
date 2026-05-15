@@ -7,13 +7,13 @@ plugins {
 android {
     namespace = "com.example.product_details"
     compileSdk {
-        version = release(36) {
+        version = release(libs.versions.releaseVersion.get().toInt()) {
             minorApiLevel = 1
         }
     }
 
     defaultConfig {
-        minSdk = 28
+        minSdk = libs.versions.minSdkVersion.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -42,6 +42,12 @@ dependencies {
     implementation(project(":core:common"))
     implementation(project(":core:di"))
     implementation(project(":core:network"))
+    implementation(project(":core:database"))
+    implementation(project(":core:common:cart_common"))
+
+    implementation(libs.kotlinx.datetime)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 
     implementation(libs.compose.material.icons)
     implementation(libs.androidx.lifecycle.viewmodel.compose)

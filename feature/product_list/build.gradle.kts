@@ -7,13 +7,13 @@ plugins {
 android {
     namespace = "com.example.product_list"
     compileSdk {
-        version = release(36) {
+        version = release(libs.versions.releaseVersion.get().toInt()) {
             minorApiLevel = 1
         }
     }
 
     defaultConfig {
-        minSdk = 28
+        minSdk = libs.versions.minSdkVersion.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
