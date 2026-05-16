@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
-    id("com.google.devtools.ksp")
+    alias(libs.plugins.ksp)
     alias(libs.plugins.metro)
 }
 

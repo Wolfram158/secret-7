@@ -67,7 +67,7 @@ internal class ProductDetailsRepositoryImpl(
     }
 
     companion object {
-        private const val MAX_DELTA_HOURS = 24
+        const val MAX_DELTA_HOURS = 24
         private val MAX_DELTA_MILLIS =
             MAX_DELTA_HOURS.toDuration(DurationUnit.HOURS).inWholeMilliseconds
     }
