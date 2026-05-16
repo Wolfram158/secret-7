@@ -1,6 +1,7 @@
 package com.example.network.api
 
 enum class Selector {
+    ID,
     TITLE,
     PRICE,
     BRAND,

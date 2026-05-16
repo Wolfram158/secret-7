@@ -13,5 +13,5 @@ import dev.zacsweers.metro.SingleIn
 internal class ClearCartUseCaseImpl(
     private val repository: CartRepository
 ) : ClearCartUseCase {
-    override suspend fun invoke() = repository.clearCart()
+    override suspend operator fun invoke() = repository.clearCart()
 }

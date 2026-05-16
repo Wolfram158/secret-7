@@ -18,6 +18,7 @@ import com.example.product_list.di.createProductListGraph
 @Composable
 fun ProductListScreen(
     onProductClick: (id: Long) -> Unit,
+    onGotoCart: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val appComponent = LocalAppComponent.current
@@ -34,6 +35,7 @@ fun ProductListScreen(
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
+        topBar = { TopAppBar(onGotoCart) },
         snackbarHost = {
             SnackbarHost(snackbar)
         }

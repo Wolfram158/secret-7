@@ -45,6 +45,7 @@ dependencies {
     implementation(project(":core:common"))
     implementation(project(":feature:product_details"))
     implementation(project(":feature:product_list"))
+    implementation(project(":feature:cart"))
 
     implementation(libs.kotlinx.serialization.json)
 

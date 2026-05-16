@@ -10,7 +10,7 @@ import com.example.database.api.ProductDetailsDbo
         ProductDetailsDbo::class,
         CartElementDbo::class
     ],
-    version = 1
+    version = 2
 )
 internal abstract class AppDatabase : RoomDatabase() {
     abstract fun productDetailsDao(): ProductDetailsDao

@@ -35,7 +35,7 @@ internal class ProductDetailsRepositoryImpl(
                 listOf(
                     Selector.TITLE, Selector.PRICE, Selector.DESCRIPTION, Selector.WEIGHT,
                     Selector.RATING, Selector.AVAILABILITY_STATUS, Selector.WARRANTY_INFORMATION,
-                    Selector.THUMBNAIL
+                    Selector.THUMBNAIL, Selector.ID
                 )
             )
         }

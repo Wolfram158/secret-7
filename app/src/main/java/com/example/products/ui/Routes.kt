@@ -8,4 +8,7 @@ object Routes {
 
     @Serializable
     data class ProductDetails(val id: Long)
+
+    @Serializable
+    object Cart
 }
