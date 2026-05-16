@@ -3,18 +3,12 @@ package com.example.database.impl
 import com.example.database.api.CartElementDbo
 import com.example.database.api.LocalDataSource
 import com.example.database.api.ProductDetailsDbo
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.BindingContainer
-import dev.zacsweers.metro.Inject
-import dev.zacsweers.metro.SingleIn
 import kotlinx.coroutines.flow.Flow
 
-@SingleIn(AppScope::class)
-@BindingContainer
-@Inject
 internal class LocalDataSourceImpl(
     private val productDetailsDao: ProductDetailsDao,
-    private val cartDao: CartDao
+    private val cartDao: CartDao,
+    private val onClose: () -> Unit
 ) : LocalDataSource {
     override suspend fun getProductDetailsDbo(id: Long): ProductDetailsDbo? {
         return productDetailsDao.getProductDetailsDbo(id)
@@ -35,4 +29,6 @@ internal class LocalDataSourceImpl(
     override suspend fun clearCart() {
         cartDao.clearCart()
     }
+
+    override fun close() = onClose()
 }

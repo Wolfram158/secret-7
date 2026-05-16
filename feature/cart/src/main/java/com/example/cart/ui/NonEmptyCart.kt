@@ -14,7 +14,7 @@ internal fun NonEmptyCart(
     LazyColumn(
         modifier = modifier.fillMaxSize()
     ) {
-        items(cart.cart.size, { it }) { index ->
+        items(cart.cart.size, { cart.cart[it].id }) { index ->
             CartItem(
                 cartElement = cart.cart[index],
                 onCartItemClick = onCartItemClick

@@ -1,3 +1,3 @@
 package com.example.database.api
 
-interface LocalDataSource : CartLocalDataSource, ProductDetailsLocalDataSource
+interface LocalDataSource : CartLocalDataSource, ProductDetailsLocalDataSource, AutoCloseable

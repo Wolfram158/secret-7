@@ -1,9 +1,8 @@
 package com.example.database.di
 
 import com.example.database.api.LocalDataSource
-import com.example.database.impl.CartDao
+import com.example.database.impl.AppDatabase
 import com.example.database.impl.LocalDataSourceImpl
-import com.example.database.impl.ProductDetailsDao
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.BindingContainer
 import dev.zacsweers.metro.ContributesTo
@@ -16,9 +15,13 @@ object LocalDataSourceImplBinding {
     @SingleIn(AppScope::class)
     @Provides
     internal fun provideLocalDataSource(
-        productDetailsDao: ProductDetailsDao,
-        cartDao: CartDao
+        database: AppDatabase
     ): LocalDataSource {
-        return LocalDataSourceImpl(productDetailsDao, cartDao)
+        return LocalDataSourceImpl(
+            database.productDetailsDao(),
+            database.cartDao(),
+            { database.close() }
+        )
+
     }
 }
