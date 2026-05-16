@@ -5,6 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ProductInfo(
+    @SerialName("id") val id: Long,
     @SerialName("thumbnail") val thumbnail: String,
     @SerialName("title") val title: String,
     @SerialName("description") val description: String,

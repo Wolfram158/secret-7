@@ -13,6 +13,6 @@ import dev.zacsweers.metro.SingleIn
 internal class IncrementCartElementCountByIdUseCaseImpl(
     private val repository: CartRepository
 ) : IncrementCartElementCountUseCase {
-    override suspend fun invoke(id: Long, title: String) =
+    override suspend operator fun invoke(id: Long, title: String) =
         repository.incrementCartElementCount(id, title)
 }

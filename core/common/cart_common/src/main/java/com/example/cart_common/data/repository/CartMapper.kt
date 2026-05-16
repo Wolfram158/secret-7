@@ -5,6 +5,8 @@ import com.example.cart_common.domain.api.model.CartElement
 import com.example.database.api.CartElementDbo
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 @Inject
 @SingleIn(CartCommonScope::class)
@@ -17,7 +19,7 @@ internal class CartMapper {
         )
     }
 
-    fun mapLocalsToDomains(locals: Iterable<CartElementDbo>) = locals.map {
-        mapLocalToDomain(it)
+    fun mapLocalsToDomains(locals: Flow<List<CartElementDbo>>) = locals.map { cart ->
+        cart.map { mapLocalToDomain(it) }
     }
 }

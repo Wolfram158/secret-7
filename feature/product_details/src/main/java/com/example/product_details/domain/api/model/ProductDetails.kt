@@ -1,6 +1,7 @@
 package com.example.product_details.domain.api.model
 
 internal data class ProductDetails(
+    val id: Long,
     val isActual: Boolean,
     val thumbnail: String,
     val title: String,

@@ -7,6 +7,7 @@ import com.example.database.api.LocalDataSource
 import dev.zacsweers.metro.ContributesBinding
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn
+import kotlinx.coroutines.flow.Flow
 
 @Inject
 @SingleIn(CartCommonScope::class)
@@ -19,8 +20,8 @@ internal class CartCommonRepositoryImpl(
         localDataSource.incrementCartElementCount(id, title)
     }
 
-    override suspend fun getCart(): List<CartElement> {
-        return cartMapper.mapLocalsToDomains(localDataSource.getCart())
+    override fun getCartFlow(): Flow<List<CartElement>> {
+        return cartMapper.mapLocalsToDomains(localDataSource.getCartFlow())
     }
 
     override suspend fun clearCart() {

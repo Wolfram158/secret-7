@@ -15,6 +15,7 @@ internal class ProductDetailsMapper {
         isActual: Boolean
     ) = with(productInfo) {
         ProductDetails(
+            id = id,
             isActual = isActual,
             title = title,
             description = description,
@@ -32,6 +33,7 @@ internal class ProductDetailsMapper {
         isActual: Boolean
     ) = with(productDetailsDbo) {
         ProductDetails(
+            id = id,
             isActual = isActual,
             title = title,
             description = description,

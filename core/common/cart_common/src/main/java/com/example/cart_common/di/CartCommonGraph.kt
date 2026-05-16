@@ -1,7 +1,7 @@
 package com.example.cart_common.di
 
 import com.example.cart_common.domain.api.usecase.ClearCartUseCase
-import com.example.cart_common.domain.api.usecase.GetCartUseCase
+import com.example.cart_common.domain.api.usecase.GetCartFlowUseCase
 import com.example.cart_common.domain.api.usecase.IncrementCartElementCountUseCase
 import com.example.database.api.LocalDataSource
 import com.example.di.AppComponent
@@ -12,7 +12,7 @@ import dev.zacsweers.metro.createGraphFactory
 @DependencyGraph(CartCommonScope::class)
 internal interface CartCommonGraph {
     val clearCartUseCase: Lazy<ClearCartUseCase>
-    val getCartUseCase: Lazy<GetCartUseCase>
+    val getCartFlowUseCase: Lazy<GetCartFlowUseCase>
     val incrementCartElementCountByIdUseCase: Lazy<IncrementCartElementCountUseCase>
 
     @DependencyGraph.Factory

@@ -4,11 +4,12 @@ import androidx.room.Dao
 import androidx.room.Query
 import com.example.database.api.CartElementDbo
 import com.example.database.api.CartLocalDataSource
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 internal interface CartDao : CartLocalDataSource {
     @Query("select * from cart")
-    override suspend fun getCart(): List<CartElementDbo>
+    override fun getCartFlow(): Flow<List<CartElementDbo>>
 
     @Query(
         "insert into cart(id, title, count)" +

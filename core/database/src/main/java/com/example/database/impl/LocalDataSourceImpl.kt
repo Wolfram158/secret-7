@@ -7,6 +7,7 @@ import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.BindingContainer
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn
+import kotlinx.coroutines.flow.Flow
 
 @SingleIn(AppScope::class)
 @BindingContainer
@@ -23,8 +24,8 @@ internal class LocalDataSourceImpl(
         return productDetailsDao.insertProductDetailsDbo(productDetailsDbo)
     }
 
-    override suspend fun getCart(): List<CartElementDbo> {
-        return cartDao.getCart()
+    override fun getCartFlow(): Flow<List<CartElementDbo>> {
+        return cartDao.getCartFlow()
     }
 
     override suspend fun incrementCartElementCount(id: Long, title: String) {
