@@ -40,6 +40,9 @@ android {
 dependencies {
     implementation(project(":core:di"))
 
+    implementation(libs.elmslie.core)
+    implementation(libs.elmslie.android)
+
     implementation(libs.compose.material.icons)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)

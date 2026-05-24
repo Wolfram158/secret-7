@@ -39,6 +39,10 @@ dependencies {
     implementation(project(":core:common"))
     implementation(project(":core:network"))
 
+    implementation(libs.elmslie.core)
+    implementation(libs.elmslie.android)
+
+    testImplementation(libs.mockito.kotlin)
     implementation(libs.compose.material.icons)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.core.ktx)
@@ -49,7 +53,8 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
-    testImplementation(kotlin("test"))
+    testImplementation(libs.kotlin.test)
+    testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

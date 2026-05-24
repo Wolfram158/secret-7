@@ -25,34 +25,48 @@ fun ProductListScreen(
     val graph = remember(appComponent) { appComponent.createProductListGraph() }
     val factory = remember(graph) { graph.getProductListViewModelFactory() }
     val viewModel = viewModel<ProductListViewModel>(factory = factory)
-    val products = viewModel.products.collectAsStateWithLifecycle()
+    val products = viewModel.states.collectAsStateWithLifecycle()
+    val currentState = products.value
     val snackbar = remember { SnackbarHostState() }
 
-    ObserveEvents(
-        viewModel.events,
-        snackbar
+    ObserveEffects(
+        viewModel.effects,
+        snackbar,
+        onProductClick,
+        onGotoCart
     )
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
-        topBar = { TopAppBar(onGotoCart) },
+        topBar = {
+            TopAppBar({
+                viewModel.accept(ProductListEvent.Ui.CartClicked)
+            })
+        },
         snackbarHost = {
             SnackbarHost(snackbar)
         }
     ) { paddingValues ->
-        when (val state = products.value) {
-            ProductListState.Error -> Error(
+        when {
+            currentState.isInitialLoading -> Loading(Modifier.padding(paddingValues))
+
+            currentState.hasError -> Error(
                 errorText = "Couldn't load products",
-                onRetry = viewModel::doInitialLoading,
+                onRetry = { viewModel.accept(ProductListEvent.Ui.Retry) },
                 modifier = Modifier.padding(paddingValues)
             )
 
-            ProductListState.Loading -> Loading(Modifier.padding(paddingValues))
-            is ProductListState.Success -> ProductListSuccessScreen(
-                state.products,
-                onProductClick,
-                viewModel::getProducts,
-                Modifier.padding(paddingValues)
+            else -> ProductListSuccessScreen(
+                products = currentState.products,
+                onProductClick = { id ->
+                    viewModel.accept(ProductListEvent.Ui.ProductClicked(id))
+                },
+                onChangeLastVisibleItemIndex = { index ->
+                    if (index != null) {
+                        viewModel.accept(ProductListEvent.Ui.LoadMore(index))
+                    }
+                },
+                modifier = Modifier.padding(paddingValues)
             )
         }
     }
