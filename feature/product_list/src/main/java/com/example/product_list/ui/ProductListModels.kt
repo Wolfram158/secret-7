@@ -10,7 +10,7 @@ internal data class ProductListState(
     val lastLoadedPage: Int = -1
 ) {
     companion object {
-        val initial: ProductListState
+        inline val initial: ProductListState
             get() = ProductListState()
     }
 }

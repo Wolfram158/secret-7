@@ -8,33 +8,33 @@ import kotlinx.coroutines.launch
 
 @Composable
 internal fun ObserveEffects(
-    events: Flow<ProductListEffect>,
+    effects: Flow<ProductListEffect>,
     snackbar: SnackbarHostState,
     onProductClick: (Long) -> Unit,
     onGotoCart: () -> Unit
 ) {
     LaunchedEffect(Unit) {
-        events.collect { event ->
-            when (event) {
+        effects.collect { effect ->
+            when (effect) {
                 is ProductListEffect.NavigateToProduct -> {
-                    onProductClick(event.id)
+                    onProductClick(effect.id)
                 }
 
                 is ProductListEffect.ShowError -> {
                     launch {
-                        snackbar.showSnackbar("Error occurred when loading pages ${event.pages}")
+                        snackbar.showSnackbar("Error occurred when loading pages ${effect.pages}")
                     }
                 }
 
                 is ProductListEffect.ShowLoading -> {
                     launch {
-                        snackbar.showSnackbar("Loading pages ${event.pages}...")
+                        snackbar.showSnackbar("Loading pages ${effect.pages}...")
                     }
                 }
 
                 is ProductListEffect.ShowSuccess -> {
                     launch {
-                        snackbar.showSnackbar("Successfully loaded ${event.countOfLoadedItems} new items")
+                        snackbar.showSnackbar("Successfully loaded ${effect.countOfLoadedItems} new items")
                     }
                 }
 

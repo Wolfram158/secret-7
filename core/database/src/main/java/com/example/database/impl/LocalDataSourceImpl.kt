@@ -22,6 +22,10 @@ internal class LocalDataSourceImpl(
         return cartDao.getCartFlow()
     }
 
+    override suspend fun getCart(): List<CartElementDbo> {
+        return cartDao.getCart()
+    }
+
     override suspend fun incrementCartElementCount(id: Long, title: String) {
         cartDao.incrementCartElementCount(id, title)
     }

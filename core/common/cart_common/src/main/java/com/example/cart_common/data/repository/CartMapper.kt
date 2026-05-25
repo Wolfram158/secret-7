@@ -22,4 +22,8 @@ internal class CartMapper {
     fun mapLocalsToDomains(locals: Flow<List<CartElementDbo>>) = locals.map { cart ->
         cart.map { mapLocalToDomain(it) }
     }
+
+    fun mapLocalsToDomains(locals: List<CartElementDbo>) = locals.map { cartElementDbo ->
+        mapLocalToDomain(cartElementDbo)
+    }
 }

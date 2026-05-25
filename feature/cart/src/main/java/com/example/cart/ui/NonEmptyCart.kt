@@ -4,20 +4,23 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 
 @Composable
 internal fun NonEmptyCart(
-    cart: CartState.NonEmpty,
+    cart: CartState,
     onCartItemClick: (id: Long) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
-        modifier = modifier.fillMaxSize()
+        modifier = modifier
+            .fillMaxSize()
     ) {
         items(cart.cart.size, { cart.cart[it].id }) { index ->
             CartItem(
                 cartElement = cart.cart[index],
-                onCartItemClick = onCartItemClick
+                onCartItemClick = onCartItemClick,
+                modifier = Modifier.testTag(TestTags.CART_ELEMENT)
             )
         }
     }

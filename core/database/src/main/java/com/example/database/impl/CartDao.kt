@@ -20,4 +20,7 @@ internal interface CartDao : CartLocalDataSource {
 
     @Query("delete from cart")
     override suspend fun clearCart()
+
+    @Query("select * from cart")
+    override suspend fun getCart(): List<CartElementDbo>
 }
