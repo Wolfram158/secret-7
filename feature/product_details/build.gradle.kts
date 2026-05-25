@@ -45,10 +45,14 @@ dependencies {
     implementation(project(":core:database"))
     implementation(project(":core:common:cart_common"))
 
+    implementation(libs.elmslie.core)
+    implementation(libs.elmslie.android)
+
     implementation(libs.kotlinx.datetime)
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
 
+    implementation(libs.androidx.appcompat)
     implementation(libs.compose.material.icons)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.core.ktx)
