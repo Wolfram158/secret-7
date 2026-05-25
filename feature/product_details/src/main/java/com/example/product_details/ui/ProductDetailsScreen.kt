@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -27,36 +26,51 @@ fun ProductDetailsScreen(
 ) {
     val appComponent = LocalAppComponent.current
     val graph = remember(appComponent) { appComponent.createProductDetailsGraph() }
-    val factory = remember(graph) { graph.getProductDetailsViewModelFactory() }
+    val factory = remember(graph) { graph.getProductDetailsViewModelFactoryFactory().create(id) }
     val viewModel = viewModel<ProductDetailsViewModel>(factory = factory)
-    val productDetails = viewModel.productDetails.collectAsStateWithLifecycle()
+    val productDetails = viewModel.states.collectAsStateWithLifecycle()
+    val currentProductDetails = productDetails.value
 
-    LaunchedEffect(Unit) {
-        viewModel.getProductDetails(id)
-    }
+    ObserveEffects(
+        effects = viewModel.effects,
+        onBackClick = onBackClick,
+        onGotoCart = onGotoCart
+    )
 
     Scaffold(
         modifier = modifier
             .fillMaxSize(),
         topBar = {
             TopAppBar(
-                onBackClick = onBackClick,
-                onIncrementCartElementCount = viewModel::incrementCartElementCount,
-                onGotoCart = onGotoCart,
+                onBackClick = {
+                    viewModel.accept(ProductDetailsEvent.Ui.BackClicked)
+                },
+                onIncrementCartElementCount = {
+                    if (currentProductDetails is ProductDetailsState.Success) {
+                        viewModel.accept(
+                            ProductDetailsEvent.Ui.IncrementCount(
+                                currentProductDetails.productDetails
+                            )
+                        )
+                    }
+                },
+                onGotoCart = {
+                    viewModel.accept(ProductDetailsEvent.Ui.CartClicked)
+                },
                 modifier = Modifier.size(24.dp)
             )
         }
     ) { paddingValues ->
-        when (val state = productDetails.value) {
+        when (currentProductDetails) {
             ProductDetailsState.Error -> Error(
                 errorText = "Couldn't load product details",
-                onRetry = { viewModel.getProductDetails(id) },
+                onRetry = { viewModel.accept(ProductDetailsEvent.Ui.Retry(id)) },
                 modifier = Modifier.padding(paddingValues)
             )
 
             ProductDetailsState.Loading -> Loading(Modifier.padding(paddingValues))
             is ProductDetailsState.Success -> ProductDetailsSuccessScreen(
-                state,
+                currentProductDetails,
                 Modifier.padding(paddingValues)
             )
         }

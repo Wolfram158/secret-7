@@ -15,7 +15,7 @@ import dev.zacsweers.metro.createGraphFactory
 
 @DependencyGraph(ProductDetailsScope::class, [CartCommonScope::class])
 internal interface ProductDetailsGraph {
-    fun getProductDetailsViewModelFactory(): ProductDetailsViewModelFactory
+    fun getProductDetailsViewModelFactoryFactory(): ProductDetailsViewModelFactory.Factory
 
     fun getGetProductDetailsUseCase(): GetProductDetailsUseCase
 

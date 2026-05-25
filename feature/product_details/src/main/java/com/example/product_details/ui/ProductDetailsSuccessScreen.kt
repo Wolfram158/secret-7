@@ -14,7 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.example.common.ui.TestTags
 
 @Composable
 internal fun ProductDetailsSuccessScreen(
@@ -32,7 +34,10 @@ internal fun ProductDetailsSuccessScreen(
         Spacer(Modifier.height(8.dp))
         Title(productDetails.productDetails.title)
         Spacer(Modifier.height(8.dp))
-        ProductDetail(productDetails.productDetails.description)
+        ProductDetail(
+            productDetails.productDetails.description,
+            Modifier.testTag(TestTags.PRODUCT_DETAILS_DESCRIPTION)
+        )
         Spacer(Modifier.height(8.dp))
         ProductDetail("Rating: ${productDetails.productDetails.rating}")
         Spacer(Modifier.height(8.dp))

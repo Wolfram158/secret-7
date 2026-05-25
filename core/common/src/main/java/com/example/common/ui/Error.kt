@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -32,7 +33,8 @@ fun Error(
         Text(text = errorText, style = MaterialTheme.typography.bodyMedium)
         Spacer(Modifier.height(8.dp))
         Button(
-            onClick = onRetry
+            onClick = onRetry,
+            modifier = Modifier.testTag(TestTags.TRY_AGAIN_BUTTON)
         ) {
             Text(text = retryButtonText, style = MaterialTheme.typography.bodyMedium)
         }

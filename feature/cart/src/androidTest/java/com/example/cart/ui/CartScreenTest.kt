@@ -8,10 +8,14 @@ import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.common.ui.LocalAppComponent
+import com.example.common.ui.TestMainActivity
+import com.example.common.ui.TestTags
 import com.example.common.ui.theme.ProductsTheme
 import com.example.database.api.CartElementDbo
 import com.example.database.api.LocalDataSource
+import com.example.database.api.MockLocalDataSource
 import com.example.di.AppComponent
+import com.example.network.api.MockRemoteDataSource
 import com.example.network.api.RemoteDataSource
 import org.junit.Rule
 import org.junit.Test

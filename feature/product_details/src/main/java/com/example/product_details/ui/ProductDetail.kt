@@ -11,10 +11,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-internal fun ProductDetail(text: String) {
+internal fun ProductDetail(
+    text: String,
+    modifier: Modifier = Modifier
+) {
     Text(
         text = text,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
             .border(width = 1.dp, color = Color.Black)
