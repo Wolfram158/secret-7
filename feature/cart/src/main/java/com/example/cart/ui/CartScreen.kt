@@ -3,6 +3,8 @@ package com.example.cart.ui
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -21,31 +23,49 @@ fun CartScreen(
     val graph = remember(appComponent) { appComponent.createCartGraph() }
     val factory = remember(graph) { graph.getCartViewModelFactory() }
     val viewModel = viewModel<CartViewModel>(factory = factory)
-    val cart = viewModel.cart.collectAsStateWithLifecycle()
+    val cart = viewModel.states.collectAsStateWithLifecycle()
+    val currentCart = cart.value
+    val snackbar = remember { SnackbarHostState() }
+
+    ObserveEffects(
+        effects = viewModel.effects,
+        onProductClick = onCartItemClick,
+        onBackClick = onBackClick
+    )
 
     Scaffold(
         modifier = Modifier
             .fillMaxSize(),
         topBar = {
             TopAppBar(
-                isNotEmpty = cart.value is CartState.NonEmpty,
-                onBackClick = onBackClick,
-                onClearCartClick = viewModel::clearCart,
+                isNotEmpty = currentCart.cart.isNotEmpty(),
+                onBackClick = {
+                    viewModel.accept(CartEvent.Ui.BackClicked)
+                },
+                onClearCartClick = {
+                    viewModel.accept(CartEvent.Ui.ClearCart)
+                },
                 modifier = Modifier
             )
+        },
+        snackbarHost = {
+            SnackbarHost(snackbar)
         }
     ) { paddingValues ->
-        when (val cart = cart.value) {
-            CartState.Empty -> EmptyCart(
+        when {
+            currentCart.isLoading -> Loading(Modifier.padding(paddingValues))
+
+            currentCart.cart.isEmpty() -> EmptyCart(
                 Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
             )
 
-            CartState.Loading -> Loading(Modifier.padding(paddingValues))
-            is CartState.NonEmpty -> NonEmptyCart(
-                cart = cart,
-                onCartItemClick = onCartItemClick,
+            else -> NonEmptyCart(
+                cart = currentCart,
+                onCartItemClick = { id ->
+                    viewModel.accept(CartEvent.Ui.ProductClicked(id))
+                },
                 Modifier.padding(paddingValues)
             )
         }

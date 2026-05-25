@@ -20,6 +20,10 @@ internal class CartCommonRepositoryImpl(
         localDataSource.incrementCartElementCount(id, title)
     }
 
+    override suspend fun getCart(): List<CartElement> {
+        return cartMapper.mapLocalsToDomains(localDataSource.getCart())
+    }
+
     override fun getCartFlow(): Flow<List<CartElement>> {
         return cartMapper.mapLocalsToDomains(localDataSource.getCartFlow())
     }

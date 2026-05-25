@@ -3,6 +3,7 @@ package com.example.cart_common.di
 import com.example.cart_common.domain.api.repository.CartRepository
 import com.example.cart_common.domain.api.usecase.ClearCartUseCase
 import com.example.cart_common.domain.api.usecase.GetCartFlowUseCase
+import com.example.cart_common.domain.api.usecase.GetCartUseCase
 import com.example.cart_common.domain.api.usecase.IncrementCartElementCountUseCase
 import com.example.database.api.LocalDataSource
 import com.example.di.AppComponent
@@ -15,6 +16,7 @@ internal interface CartCommonGraph {
     val clearCartUseCase: Lazy<ClearCartUseCase>
     val getCartFlowUseCase: Lazy<GetCartFlowUseCase>
     val incrementCartElementCountByIdUseCase: Lazy<IncrementCartElementCountUseCase>
+    val getCartUseCase: Lazy<GetCartUseCase>
 
     fun getCartRepository(): CartRepository
 
