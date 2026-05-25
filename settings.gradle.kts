@@ -11,6 +11,9 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
+}
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -19,6 +22,13 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ProductsStore"
+rootProject.name = "Products"
 include(":app")
- 
+include(":feature:product_list")
+include(":feature:product_details")
+include(":core:network")
+include(":core:di")
+include(":core:common")
+include(":core:database")
+include(":feature:cart")
+include(":core:common:cart_common")
