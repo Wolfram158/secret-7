@@ -4,11 +4,11 @@ interface RemoteDataSource {
     suspend fun getProducts(
         limit: Int,
         skip: Int,
-        select: List<Selector>
+        select: String
     ): ProductsResponse
 
     suspend fun getProductInfo(
         id: Long,
-        select: List<Selector>
+        select: String
     ): ProductInfo
 }

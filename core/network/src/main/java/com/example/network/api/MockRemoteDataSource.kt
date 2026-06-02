@@ -7,11 +7,11 @@ class MockRemoteDataSource : RemoteDataSource {
     override suspend fun getProducts(
         limit: Int,
         skip: Int,
-        select: List<Selector>
+        select: String
     ): ProductsResponse = getProducts()
 
     override suspend fun getProductInfo(
         id: Long,
-        select: List<Selector>
+        select: String
     ): ProductInfo = getProductInfo()
 }

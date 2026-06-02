@@ -7,6 +7,7 @@ import com.example.cart_common.domain.api.usecase.ClearCartUseCase
 import com.example.cart_common.domain.api.usecase.GetCartFlowUseCase
 import com.example.cart_common.domain.api.usecase.GetCartUseCase
 import com.example.di.AppComponent
+import com.example.settings.api.SettingsDataSource
 import dev.zacsweers.metro.DependencyGraph
 import dev.zacsweers.metro.Provides
 import dev.zacsweers.metro.createGraphFactory
@@ -20,7 +21,8 @@ internal interface CartGraph {
         fun create(
             @Provides clearCartUseCase: ClearCartUseCase,
             @Provides getCartFlowUseCase: GetCartFlowUseCase,
-            @Provides getCartUseCase: GetCartUseCase
+            @Provides getCartUseCase: GetCartUseCase,
+            @Provides settingsDataSource: SettingsDataSource
         ): CartGraph
     }
 }
@@ -30,6 +32,7 @@ internal fun AppComponent.createCartGraph(): CartGraph {
     return createGraphFactory<CartGraph.Factory>().create(
         cartCommonComponent.clearCartUseCase.value,
         cartCommonComponent.getCartFlowUseCase.value,
-        cartCommonComponent.getCartUseCase.value
+        cartCommonComponent.getCartUseCase.value,
+        settingsDataSource
     )
 }

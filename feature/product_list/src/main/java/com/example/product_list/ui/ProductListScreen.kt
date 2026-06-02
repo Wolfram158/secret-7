@@ -3,8 +3,6 @@ package com.example.product_list.ui
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -27,11 +25,9 @@ fun ProductListScreen(
     val viewModel = viewModel<ProductListViewModel>(factory = factory)
     val products = viewModel.states.collectAsStateWithLifecycle()
     val currentState = products.value
-    val snackbar = remember { SnackbarHostState() }
 
     ObserveEffects(
         viewModel.effects,
-        snackbar,
         onProductClick,
         onGotoCart
     )
@@ -42,9 +38,6 @@ fun ProductListScreen(
             TopAppBar({
                 viewModel.accept(ProductListEvent.Ui.CartClicked)
             })
-        },
-        snackbarHost = {
-            SnackbarHost(snackbar)
         }
     ) { paddingValues ->
         when {
@@ -58,6 +51,7 @@ fun ProductListScreen(
 
             else -> ProductListSuccessScreen(
                 products = currentState.products,
+                isLoadingMore = currentState.isLoadingMore,
                 onProductClick = { id ->
                     viewModel.accept(ProductListEvent.Ui.ProductClicked(id))
                 },

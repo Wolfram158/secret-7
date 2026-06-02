@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.cart.di.CartScope
 import com.example.cart_common.domain.api.usecase.ClearCartUseCase
 import com.example.cart_common.domain.api.usecase.GetCartUseCase
+import com.example.settings.api.SettingsDataSource
 import dev.zacsweers.metro.Inject
 import dev.zacsweers.metro.SingleIn
 
@@ -14,11 +15,13 @@ import dev.zacsweers.metro.SingleIn
 internal class CartViewModelFactory(
     private val clearCartUseCase: ClearCartUseCase,
     private val getCartUseCase: GetCartUseCase,
+    private val settingsDataSource: SettingsDataSource
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return CartViewModel(
             clearCartUseCase = clearCartUseCase,
-            getCartUseCase = getCartUseCase
+            getCartUseCase = getCartUseCase,
+            settingsDataSource = settingsDataSource
         ) as T
     }
 }

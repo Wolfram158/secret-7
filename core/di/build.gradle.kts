@@ -36,7 +36,8 @@ android {
 dependencies {
     implementation(project(":core:network"))
     implementation(project(":core:database"))
-
+    implementation(project(":core:settings"))
+    
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

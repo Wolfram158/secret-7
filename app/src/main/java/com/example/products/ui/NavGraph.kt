@@ -4,8 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navDeepLink
 import androidx.navigation.toRoute
 import com.example.cart.ui.CartScreen
+import com.example.common.ui.Constants
 import com.example.product_details.ui.ProductDetailsScreen
 import com.example.product_list.ui.ProductListScreen
 
@@ -41,13 +43,20 @@ fun NavGraph(
                 },
                 onGotoCart = {
                     navHostController.navigate(Routes.Cart) {
+                        popUpTo(Routes.ProductList) {
+                            inclusive = false
+                        }
                         launchSingleTop = true
                     }
                 }
             )
         }
 
-        composable<Routes.Cart> {
+        composable<Routes.Cart>(
+            deepLinks = listOf(
+                navDeepLink { uriPattern = Constants.CART_DEEP_LINK }
+            )
+        ) {
             CartScreen(
                 onBackClick = {
                     navHostController.popBackStack()
