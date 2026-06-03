@@ -40,6 +40,8 @@ android {
 dependencies {
     implementation(project(":core:di"))
     implementation(project(":core:database"))
+    implementation(project(":core:settings"))
+    implementation(project(":core:common"))
 
     implementation(libs.kotlinx.datetime)
     implementation(libs.coil.compose)

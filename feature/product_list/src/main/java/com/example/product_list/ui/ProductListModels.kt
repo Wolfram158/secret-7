@@ -38,9 +38,6 @@ internal sealed interface ProductListCommand {
 }
 
 internal sealed interface ProductListEffect {
-    data class ShowLoading(val pages: String) : ProductListEffect
-    data class ShowError(val pages: String) : ProductListEffect
-    data class ShowSuccess(val countOfLoadedItems: Int) : ProductListEffect
     data class NavigateToProduct(val id: Long) : ProductListEffect
     object NavigateToCart : ProductListEffect
 }

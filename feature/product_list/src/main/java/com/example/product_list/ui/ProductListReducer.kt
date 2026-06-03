@@ -4,7 +4,6 @@ import com.example.product_list.domain.api.model.ShortProductInfo
 import com.example.product_list.ui.ProductListCommand.LoadMore
 import com.example.product_list.ui.ProductListEffect.NavigateToCart
 import com.example.product_list.ui.ProductListEffect.NavigateToProduct
-import com.example.product_list.ui.ProductListEffect.ShowLoading
 import money.vivid.elmslie.core.store.ScreenReducer
 import money.vivid.elmslie.core.store.StateReducer
 
@@ -41,13 +40,9 @@ internal class ProductListReducer : ScreenReducer<
                 state {
                     copy(isLoadingMore = false)
                 }
-                effects {
-                    +ProductListEffect.ShowError(state.lastLoadedPage.nextTwoPagesAsString)
-                }
             }
 
             is ProductListEvent.Internal.MoreProductsLoaded -> {
-                val oldCount = state.products.size
                 val newProducts = mergeProducts(state.products, event.products)
                 state {
                     copy(
@@ -55,9 +50,6 @@ internal class ProductListReducer : ScreenReducer<
                         isLoadingMore = false,
                         lastLoadedPage = newProducts.size.lastLoadedPage
                     )
-                }
-                effects {
-                    +ProductListEffect.ShowSuccess(newProducts.size - oldCount)
                 }
             }
         }
@@ -83,9 +75,6 @@ internal class ProductListReducer : ScreenReducer<
                 }
                 state {
                     copy(isLoadingMore = true)
-                }
-                effects {
-                    +ShowLoading(state.lastLoadedPage.nextTwoPagesAsString)
                 }
                 commands {
                     +LoadMore(state.lastLoadedPage * ON_PAGE)
@@ -117,9 +106,6 @@ internal class ProductListReducer : ScreenReducer<
 
     private val Int.lastLoadedPage
         get() = div(ON_PAGE)
-
-    private val Int.nextTwoPagesAsString
-        get() = "${plus(1)}, ${plus(2)}"
 
     private fun mergeProducts(
         old: List<ShortProductInfo>,

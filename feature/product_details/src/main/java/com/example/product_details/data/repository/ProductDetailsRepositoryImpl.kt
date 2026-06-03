@@ -20,6 +20,12 @@ internal class ProductDetailsRepositoryImpl(
     private val localDataSource: LocalDataSource,
     private val productDetailsMapper: ProductDetailsMapper
 ) : ProductDetailsRepository {
+    private val select = listOf(
+        Selector.TITLE, Selector.PRICE, Selector.DESCRIPTION, Selector.WEIGHT,
+        Selector.RATING, Selector.AVAILABILITY_STATUS, Selector.WARRANTY_INFORMATION,
+        Selector.THUMBNAIL, Selector.ID
+    ).joinToString(separator = ",") { it.selectorName }
+
     override suspend fun getProductDetails(
         id: Long
     ): ProductDetails {
@@ -32,11 +38,7 @@ internal class ProductDetailsRepositoryImpl(
         val remoteResult = runCatching {
             remoteDataSource.getProductInfo(
                 id,
-                listOf(
-                    Selector.TITLE, Selector.PRICE, Selector.DESCRIPTION, Selector.WEIGHT,
-                    Selector.RATING, Selector.AVAILABILITY_STATUS, Selector.WARRANTY_INFORMATION,
-                    Selector.THUMBNAIL, Selector.ID
-                )
+                select
             )
         }
         return when (val remote = remoteResult.getOrNull()) {

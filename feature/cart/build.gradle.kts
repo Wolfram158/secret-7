@@ -43,6 +43,7 @@ dependencies {
     implementation(project(":core:network"))
     implementation(project(":core:database"))
     implementation(project(":core:common:cart_common"))
+    implementation(project(":core:settings"))
 
     implementation(libs.elmslie.core)
     implementation(libs.elmslie.android)

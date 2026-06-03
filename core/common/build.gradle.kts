@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.metro)
 }
 
 android {
@@ -43,6 +44,7 @@ dependencies {
     implementation(libs.elmslie.core)
     implementation(libs.elmslie.android)
 
+    implementation(libs.androidx.activity.compose)
     implementation(libs.compose.material.icons)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)

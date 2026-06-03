@@ -1,5 +1,6 @@
 package com.example.cart.ui
 
+import com.example.cart.ui.CartEffect.NavigateToProduct
 import money.vivid.elmslie.core.store.ScreenReducer
 import money.vivid.elmslie.core.store.StateReducer
 
@@ -15,11 +16,19 @@ internal class CartReducer : ScreenReducer<
         event: CartEvent.Internal
     ) {
         when (event) {
-            is CartEvent.Internal.Loaded -> {
+            is CartEvent.Internal.CartLoaded -> {
                 state {
                     copy(
                         cart = event.cart,
                         isLoading = false
+                    )
+                }
+            }
+
+            is CartEvent.Internal.SettingsLoaded -> {
+                state {
+                    copy(
+                        remindAboutPurchase = event.settings.remindAboutPurchase
                     )
                 }
             }
@@ -47,13 +56,25 @@ internal class CartReducer : ScreenReducer<
                     copy(isLoading = true)
                 }
                 commands {
-                    +CartCommand.Load
+                    +CartCommand.LoadCart
                 }
             }
 
             is CartEvent.Ui.ProductClicked -> {
                 effects {
-                    +CartEffect.NavigateToProduct(event.id)
+                    +NavigateToProduct(event.id)
+                }
+            }
+
+            CartEvent.Ui.ChangeRemindAboutPurchase -> {
+                commands {
+                    +CartCommand.ChangeRemindAboutPurchase
+                }
+            }
+
+            CartEvent.Ui.GetRemindAboutPurchase -> {
+                commands {
+                    +CartCommand.LoadSettings
                 }
             }
         }
